@@ -5,3 +5,4 @@ print("Hello World!")
 
 # Kommentar
 # Kommtar2
+# devrim
