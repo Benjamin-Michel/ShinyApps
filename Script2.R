@@ -11,7 +11,7 @@ Sctplt<-ggplot(data = cancer_data.csv) +
 
 #Boxplot = gender vs tumor_size
 
-Boxplt<-ggplot(data = cancer_data.csv, aes(x=geschlecht, y= tumor_size,)) +
+Boxplt<-ggplot(data = cancer_data.csv, aes(x=geschlecht, y= tumor_size, fill = smoking)) +
   geom_boxplot()+
   labs(title = "Boxplot",
        x = "Geschlecht",
@@ -21,7 +21,7 @@ Boxplt<-ggplot(data = cancer_data.csv, aes(x=geschlecht, y= tumor_size,)) +
 #Barplot = agegroup vs chol
 
 barbplt<-ggplot(data = cancer_data.csv) +
-  geom_bar(mapping = aes(x = agegroup ,y= chol)) +
+  geom_bar(mapping = aes(x = agegroup ,y= chol, color)) +
   labs(title = "Säulendiagram",
        x = "Altersgruppen",
        y = "Cholesterine")
