@@ -25,3 +25,4 @@ barbplt<-ggplot(data = cancer_data.csv) +
   labs(title = "Säulendiagram",
        x = "Altersgruppen",
        y = "Cholesterine")
+
