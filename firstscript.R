@@ -1,8 +1,8 @@
 library(dplyr)
-library(plyr)
+#library(plyr)
 library(tidyr)
 library(ggplot2)
-
+library(epiR)
 print("Hello World!")
 
 
@@ -10,7 +10,7 @@ print("Hello World!")
 # Kommtar2
 # devrim
 # hallo
-
+rm(list=ls())
 #Datenanpassung 
 
 #1.read csv file 
@@ -23,8 +23,10 @@ initial_data <- read.csv("cancer_data.csv",sep=",",header = TRUE)
 table(initial_data$age) # see frequency table of age
 summary(initial_data$age) # see the Characteristic values 
 data_01 <- initial_data%>%mutate(altersgruppe=case_when( # add new column for age class based on Characteristic values 
-  between(age,26,53) ~ "under 50 ",
-  between(age,54,82) ~ "above 56"))
+  between(age,18,29) ~ "under 30 ",
+  between(age,30,44) ~ "30-44",
+  between(age,45,59) ~ "45-59 ",
+  between(age,60,100) ~ "above 60"))
 #2.2 add tumor_size_dichotom 
 summary(initial_data$tumour_size) # see the Characteristic values
 data_01 <- data_01%>%mutate(tumor_size_dichotom=case_when( # add new column for tumor_size_dichotom based on Characteristic values 
@@ -77,8 +79,11 @@ Sctplt<-ggplot(data = data_final) +
   geom_point(mapping = aes(x = BMI, y = tumour_size, color = gender)) +
   labs(title = "Scatterplot",
        x = "BMI",
-       y = "Tumorgröße")
+       y = "Tumorgröße")+geom_smooth(mapping = aes(x = BMI, y = tumour_size),se = FALSE)
 Sctplt
+
+cor(data_final$tumour_size,data_final$BMI)
+
 #2.
 #fehler bei Visaulisierung ,die Färbung kann nicht nach einer dritten Variable 
 Boxplt<-ggplot(data = data_final, aes(x=gender, y= tumour_size, fill = gender)) +
@@ -93,6 +98,7 @@ Boxplt1<-ggplot(data = data_final, aes(x=smoking, y= tumour_size, fill = smoking
        x = "Rauchen Verhältnis",
        y = "Tumorgröße")
 Boxplt1
+
 #3.
 #Auf Y Achse in Säulendiagram wichtig zu wissen ,wird nur nur !! die Häufigkeit der 
 #Gruppen dargestellt .
@@ -106,14 +112,31 @@ barbplt<-ggplot(data = data_final,aes(x = altersgruppe ,fill=tumor_size_dichotom
 barbplt
 #####################################################################################
 #1.Altersgruppen mit Tumour size dichotom
-tab_01 <-  xtabs(~altersgruppe+ tumor_size_dichotom ,data=data_final)                                                                                    
+tab_01 <-  xtabs(~tumor_size_dichotom+altersgruppe  ,data=data_final)                                                                                    
 tab_01
-#2.Altersgruppen vs chol_dichotom
-tab_02 <-  xtabs(~altersgruppe+ chol_dichotom ,data=data_final)                                                                                    
+#1.1 Fisher Test ausgewählt ,mehrere Werte kleiner als 5 ,die Voraussetzung des CHISQ Tests nicht erfüllt :
+#Nullhypothese : Alter & Tumorgröße unabhängig
+#Alternative Hypothese : Alter & Tumorgröße sind abhängig
+fisher.test(data_final$tumor_size_dichotom , data_final$altersgruppe)
+#2.Rauchen vs Tumorsize_dichotom:
+tab_02 <-  xtabs(~smoking + tumor_size_dichotom ,data=data_final)                                                                                    
 tab_02
+e <-epi.2by2(tab_02,conf.level = 0.90)
+e
+#OR=0.46
 #3.tumor_size_dichotom vs chol_dichotom
+#Homgenitätstest : 80% von der Kreuztabellwerten sind kleiner als 5 ,die Voraussetzung ist erfüllt :
+#Nullhypothese:p(T1,niedrig)=p(T1,normal)=p(T1,hoch)
+#Alernative Hypothese :p(i,j)!=p(i,j) ,für mind. ein(i,j) ,i:{T1,T2} ,j:{niedrig ,normal ,hoch}
 tab_03 <-  xtabs(~tumor_size_dichotom+ chol_dichotom ,data=data_final)                                                                                    
 tab_03
+n <- sum(tab_03)
+expected <- outer(rowSums(tab_03),colSums(tab_03))/n
+expected
+chisq.test(data_final$tumor_size_dichotom,data_final$chol_dichotom)
 #4. BMI_dichotom  vs chol_dichotom (unverständliches Ergebnis)
 tab_04 <-  xtabs(~BMI_dichotom + chol_dichotom ,data=data_final)                                                                                    
 tab_04
+summary(data_final$BMI)
+
+
