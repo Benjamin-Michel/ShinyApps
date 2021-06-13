@@ -33,6 +33,12 @@ data_01 <- data_01%>%mutate(tumor_size_dichotom=case_when( # add new column for 
   between(tumour_size,1.6,2) ~ "T1 ",
   between(tumour_size,2,5) ~ "T2"))
 
+# Groesse auf ganze cm runden
+data_01$height <- round(data_01$height) 
+
+# Gewicht auf ganze kg runden
+data_01$weight <- round(data_01$weight) 
+
 #2.4 add BMI column acorrding to formula
 data_01 <- data_01%>%mutate(BMI=weight/(height/100)^2)
 #3 encoding 0,1 variables (Gender, Smoking)
