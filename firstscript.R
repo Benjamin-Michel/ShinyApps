@@ -101,7 +101,7 @@ View(data_final)
 
 
 ########################################################################################################################
-#1.
+#1. Scatterplot zwischen Bmi und Tumorgröße
 Sctplt<-ggplot(data = data_final) +
   geom_point(mapping = aes(x = BMI, y = tumour_size, color = gender)) +
   labs(title = "Scatterplot",
@@ -110,15 +110,18 @@ Sctplt<-ggplot(data = data_final) +
 Sctplt
 
 cor(data_final$tumour_size,data_final$BMI)
+#positive Koerrilation
 
-#2.
-#fehler bei Visaulisierung ,die Färbung kann nicht nach einer dritten Variable 
+#2.Boxplot um die Häufigkeit zu untersuchen
 Boxplt<-ggplot(data = data_final, aes(x=gender, y= tumour_size, fill = gender)) +
   geom_boxplot()+
   labs(title = "Boxplot",
        x = "Geschlecht",
+       
        y = "Tumorgröße")
 Boxplt
+
+
 Boxplt1<-ggplot(data = data_final, aes(x=smoking, y= tumour_size, fill = smoking)) +
   geom_boxplot()+
   labs(title = "Boxplot",
@@ -127,8 +130,9 @@ Boxplt1<-ggplot(data = data_final, aes(x=smoking, y= tumour_size, fill = smoking
 Boxplt1
 
 #3.
-#Auf Y Achse in Säulendiagram wichtig zu wissen ,wird nur nur !! die Häufigkeit der 
+#Auf Y Achse in Säulendiagram wichtig zu wissen ,wird nur die Häufigkeit der 
 #Gruppen dargestellt .
+#Säulendiagramm, eingeteilt in 3 Altersgruppen
 barbplt<-ggplot(data = data_final,aes(x = altersgruppe ,fill=tumor_size_dichotom)) +
   geom_bar( ) +
   labs(title = "Säulendiagram",
