@@ -111,7 +111,7 @@ Boxplt1
 #3.
 #Auf Y Achse in Säulendiagram wichtig zu wissen ,wird nur die Häufigkeit der 
 #Gruppen dargestellt .
-#Säulendiagramm, eingeteilt in 3 Altersgruppen
+#Säulendiagramm, eingeteilt in Altersgruppen
 barbplt<-ggplot(data = data_final,aes(x = altersgruppe ,fill=tumor_size_dichotom)) +
   geom_bar( ) +
   labs(title = "Säulendiagram",
