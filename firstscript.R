@@ -148,12 +148,20 @@ tab_01
 #1.1 Fisher Test ausgewählt ,mehrere Werte kleiner als 5 ,die Voraussetzung des CHISQ Tests nicht erfüllt :
 #Nullhypothese : Alter & Tumorgröße unabhängig
 #Alternative Hypothese : Alter & Tumorgröße sind abhängig
-fisher.test(data_final$tumor_size_dichotom , data_final$altersgruppe)
+f<-fisher.test(data_final$tumor_size_dichotom , data_final$altersgruppe)
+fs <-toString(f)
+fs
+str(f)
+html1 <- paste0('<p>
+         The Chi quadrad Test kann nicht angewendet werden , um die Abhängigkeit zu untersuchen .weil die 
+         mehr als 20% aller Zellen der Tabelle sind kleiner als 5. Deswegen sollte Exakter fisher Test durchgeführt werden
+         </p>',"<br>")
+class(html1)
 #2.Rauchen vs Tumorsize_dichotom:
 tab_02 <-  xtabs(~smoking + tumor_size_dichotom ,data=data_final)                                                                                    
 tab_02
 e <-epi.2by2(tab_02,conf.level = 0.90)
-e
+str(e$massoc.detail$OR.strata.score)
 #OR=0.46
 #3.tumor_size_dichotom vs chol_dichotom
 #Homgenitätstest : 80% von der Kreuztabellwerten sind kleiner als 5 ,die Voraussetzung ist erfüllt :
@@ -163,7 +171,9 @@ tab_03 <-  xtabs(~tumor_size_dichotom+ chol_dichotom ,data=data_final)
 tab_03
 n <- sum(tab_03)
 expected <- outer(rowSums(tab_03),colSums(tab_03))/n
-expected
+library(data.table)
+expected<-as.data.table(expected)
+class(expected)
 chisq.test(data_final$tumor_size_dichotom,data_final$chol_dichotom)
 #4. BMI_dichotom  vs chol_dichotom (unverständliches Ergebnis)
 tab_04 <-  xtabs(~BMI_dichotom + chol_dichotom ,data=data_final)                                                                                    
