@@ -103,17 +103,53 @@ server<-function(input, output){
   #4. BMI_dichotom  vs chol_dichotom (unverständliches Ergebnis)
   tab_04 <-  xtabs(~BMI_dichotom + chol_dichotom ,data=data_final)                                                                                    
   tab_04
+  
   #generat the table output
   output$table <- renderTable(head(theData()))
   
-  output$plot <- renderPlot({
+  #generate the plot output 
+  output$plot1 <- renderPlot({
     theData() %>% 
-      ggplot(aes(x=Sepal.Length, y=Sepal.Width))+
-      geom_point()+
-      theme_bw()+
-      labs(x="Irirs Sepal Length",
-           y="Iris Sepal Width")
+      ggplot(data = data_final) +
+      geom_point(mapping = aes(x = BMI, y = tumour_size, color = gender)) +
+      labs(title = "Scatterplot",
+           x = "BMI",
+           y = "Tumorgröße")+geom_smooth(mapping = aes(x = BMI, y = tumour_size),se = FALSE)
     })
+  
+  output$plot2 <- renderPlot({
+    theData() %>% 
+      ggplot(data = data_final, aes(x=gender, y= tumour_size, fill = gender)) +
+      geom_boxplot()+
+      labs(title = "Boxplot",
+           x = "Geschlecht",
+           
+           y = "Tumorgröße")
+  })
+  
+  output$plot3 <- renderPlot({
+    theData() %>% 
+      ggplot(data = data_final, aes(x=smoking, y= tumour_size, fill = smoking)) +
+      geom_boxplot()+
+      labs(title = "Boxplot",
+           x = "Rauchen Verhältnis",
+           y = "Tumorgröße")
+  })
+  
+  
+  output$plot4 <- renderPlot({
+    theData() %>% 
+      ggplot(data = data_final,aes(x = altersgruppe ,fill=tumor_size_dichotom)) +
+      geom_bar( ) +
+      labs(title = "Säulendiagram",
+           x = "Altersgruppen",
+           y = "Count")+
+      geom_text(aes(label=scales::percent(..count../sum(..count..))),
+                stat='count',size = 3, hjust = 0.5, vjust = 0.5, position ="stack")
+  }) 
+  
+  
+  
   output$tab_01 <- renderTable(as.data.frame.matrix(tab_01), striped=TRUE, bordered = TRUE,rownames = TRUE)
   output$tab_02 <- renderTable(as.data.frame.matrix(tab_02), striped=TRUE, bordered = TRUE,rownames = TRUE)
   output$tab_03 <- renderTable(as.data.frame.matrix(tab_03), striped=TRUE, bordered = TRUE,rownames = TRUE)
