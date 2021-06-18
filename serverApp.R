@@ -5,6 +5,7 @@ server<-function(input, output){
   theData <- reactive(iris %>% filter(Species == input$species))
   initial_data <- read.csv("cancer_data.csv",sep=",",header = TRUE)
   
+  
   #2.add new columns 
   
   #2.1 add altersgrppe 
@@ -74,6 +75,9 @@ server<-function(input, output){
   
   #sort values in data frame by ID using order
   data_final <-data_final[order(data_final$ID),]
+  
+  output$value <- renderTable(data_final)
+    
   #####################################################################################
   #1.Altersgruppen mit Tumour size dichotom
   tab_01 <-  xtabs(~tumor_size_dichotom+altersgruppe  ,data=data_final)                                                                                    
@@ -219,4 +223,3 @@ server<-function(input, output){
     
 }
 shinyApp(ui=FirstApp,server = server)
-
