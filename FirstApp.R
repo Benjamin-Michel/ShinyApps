@@ -16,7 +16,17 @@ FirstApp <-fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Data Table", tableOutput("value")),
-        tabPanel("Plot", plotOutput("plot")),
+        tabPanel("Grafiken", tabsetPanel(tabPanel("graph1",
+          plotOutput("plot1")),tabPanel("graph2",
+                                        plotOutput("plot2")),tabPanel("graph3",
+                                                                      plotOutput("plot3")),tabPanel("graph4",
+                                                                                                    plotOutput("plot4")))),
+          #,tags$p("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen BMI und der Tumorgröße",  
+           #                         plotOutput("plot2", tags$p("Das Boxplotzeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Geschlecht an"),
+            #                                   plotOutput("plot3", tags$p("Das Boxplotz zeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Rauchen an"),                    
+             #                                             plotOutput("plot4", tags$p("Das Säulendiagramm, eingeteilt in Altersgruppen, zeigt uns die Häufigkeiten in den jweiligen Altersgruppen"),
+              #                                            ))))),
+
         tabPanel("Tabellen",tabsetPanel(tabPanel("Tabelle 1",tags$p("Erste Tabelle ist eine Kreuztabelle zwischen die nach TNM klassifizierte Tumorgrößen und Altersgruppen :"), tableOutput("tab_01")
                                                  ,tags$p("Anschaulich gibt es keine Patient über 45 Lebensjahr , deren Tumoren T1(<2 cm) nach TNM klassifiziert .Sowie besteht es keine junge Patienten an T2 Tumoren betroffen .")
                                                  ,br(), actionButton("but_01", "Abhängigkeit testen")), tabPanel("Tabelle 2 ","Zweite Tabelle ist eine Kreuztabelle zwischen Rauchen und Tumorgrößen", tableOutput("tab_02"),

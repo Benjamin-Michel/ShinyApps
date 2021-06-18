@@ -1,5 +1,6 @@
 #Version 1.0
 library(epiR)
+library(ggplot2)
 
 server<-function(input, output){
   theData <- reactive(iris %>% filter(Species == input$species))
@@ -108,21 +109,17 @@ server<-function(input, output){
   tab_04 <-  xtabs(~BMI_dichotom + chol_dichotom ,data=data_final)                                                                                    
   tab_04
   
-  #generat the table output
-  output$table <- renderTable(head(theData()))
-  
+
   #generate the plot output 
   output$plot1 <- renderPlot({
-    theData() %>% 
       ggplot(data = data_final) +
-      geom_point(mapping = aes(x = BMI, y = tumour_size, color = gender)) +
+      geom_point(aes(x = BMI, y = tumour_size, color = gender)) +
       labs(title = "Scatterplot",
            x = "BMI",
            y = "Tumorgröße")+geom_smooth(mapping = aes(x = BMI, y = tumour_size),se = FALSE)
     })
   
   output$plot2 <- renderPlot({
-    theData() %>% 
       ggplot(data = data_final, aes(x=gender, y= tumour_size, fill = gender)) +
       geom_boxplot()+
       labs(title = "Boxplot",
@@ -132,8 +129,7 @@ server<-function(input, output){
   })
   
   output$plot3 <- renderPlot({
-    theData() %>% 
-      ggplot(data = data_final, aes(x=smoking, y= tumour_size, fill = smoking)) +
+      ggplot(data = data_final,aes(x=smoking, y= tumour_size, fill = smoking)) +
       geom_boxplot()+
       labs(title = "Boxplot",
            x = "Rauchen Verhältnis",
@@ -142,7 +138,6 @@ server<-function(input, output){
   
   
   output$plot4 <- renderPlot({
-    theData() %>% 
       ggplot(data = data_final,aes(x = altersgruppe ,fill=tumor_size_dichotom)) +
       geom_bar( ) +
       labs(title = "Säulendiagram",
