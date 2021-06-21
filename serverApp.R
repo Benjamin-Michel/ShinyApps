@@ -113,7 +113,7 @@ server<-function(input, output){
   #generate the plot output 
   output$plot1 <- renderPlot({
       ggplot(data = data_final) +
-      geom_point(aes(x = BMI, y = tumour_size, color = gender)) +
+      geom_point(aes(x = input$X_Axis, y = input$Y_Axis, color = gender)) +
       labs(title = "Scatterplot",
            x = "BMI",
            y = "Tumorgröße")+geom_smooth(mapping = aes(x = BMI, y = tumour_size),se = FALSE)

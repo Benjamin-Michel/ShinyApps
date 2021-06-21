@@ -18,7 +18,7 @@ FirstApp <-fluidPage(
         tabPanel("Data Table", tableOutput("value")),
         tabPanel("Grafiken", tabsetPanel(tabPanel("graph1",
           plotOutput("plot1"),tags$p("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen BMI und der Tumorgröße gibt")),tabPanel("graph2",
-                                        plotOutput("plot2"),tags$p("Das Boxplotzeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Geschlecht an")),tabPanel("graph3",
+                                        plotOutput("plot2"),tags$p("Das Boxplot zeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Geschlecht an")),tabPanel("graph3",
                plotOutput("plot3"),tags$p("Das Boxplotz zeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Rauchen an"),),tabPanel("graph4",
                                                                                                     plotOutput("plot4"),tags$p("Das Säulendiagramm, eingeteilt in Altersgruppen, zeigt uns die Häufigkeiten in den jweiligen Altersgruppen")))),
           #,tags$p("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen BMI und der Tumorgröße",  
