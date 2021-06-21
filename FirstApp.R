@@ -7,7 +7,7 @@ FirstApp <-fluidPage(
   titlePanel("Cancer App"),
   sidebarLayout(
     sidebarPanel(
-      p('Gruupe 5'),br(),
+      p('Gruppe 5'),br(),
       p('Gruppemitglieder : Benjamin Michel , Kussi Katsha , Devirm Evelik') ,
       p('Version 1.0'),br(),
       p('Dieses App wurde im Rahmen der Vorlesung Einführung in R und Shiny erstellt .'),br(),
