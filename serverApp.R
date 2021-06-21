@@ -154,6 +154,7 @@ server<-function(input, output){
   output$tab_03 <- renderTable(as.data.frame.matrix(tab_03), striped=TRUE, bordered = TRUE,rownames = TRUE)
   output$expected <- renderTable(as.data.frame.matrix(expected), striped=TRUE, bordered = TRUE,rownames = TRUE)
   f<-fisher.test(data_final$tumor_size_dichotom , data_final$altersgruppe)
+  homogen <-chisq.test(data_final$tumor_size_dichotom,data_final$chol_dichotom)
   observeEvent(input$but_01, {
     insertUI(
       selector = "#but_01",
@@ -169,7 +170,7 @@ server<-function(input, output){
          </p>',"<br><br><br><span style=\"padding-left:120px\"><span style=\"font-size:18pt\">",f$method,
                       "</span><br> <br>H<sub>0</sub> : Alter und Tumorgrößen sind voneinander unabhägig"
                       ,"<br> <br>H<sub>1</sub> : Alter und Tumorgrößen sind voneinander abhägig","<br> <br>  Variablnamen : ",f$data.name ,"<br> <br> P Wert =",
-                      f$p.value," > 0.05 . <br> Interpretation : Die Nullhypothese kann abgelehnet werden . Der Zusammenhan zwischen Alter und Tumorgrößen ist nachweisbar"))
+                      f$p.value," < 0.05 . <br> Interpretation : Die Nullhypothese kann abgelehnet werden . Der Zusammenhan zwischen Alter und Tumorgrößen ist nachweisbar"))
         )
         
         )
@@ -209,7 +210,8 @@ server<-function(input, output){
           HTML(paste0("<p>
          Der Chi quadrad Test kann dazu angewendet werden , da alle erwartete Häufigkeiten gößer als 1 .",br(),"H<sub>0</sub> : P(hoch,T1)=P(normal,T1)=P(hoch,T1) <br>
                     , P(niedrig,T2)=P(normal,T2)=P(hoch,T2) "
-                      ,"<br> <br>H<sub>1</sub> : P(i,j) &ne;  P(i,j) ,für mindestens ein(i,j) wobei i &isin;{hoch,mittel,niedrig},j &isin;	{T1,T2} </p> <br> qosay"))
+                      ,"<br> <br>H<sub>1</sub> : P(i,j) &ne;  P(i,j) ,für mindestens ein(i,j) wobei i &isin;{hoch,mittel,niedrig},j &isin;	{T1,T2} </p> <br> 
+                         P Wert =",homogen$p.value,"> 0.05 .",br(),"H<sub>0</sub> kann nicht abgelehnet werden .Es spricht nichts gegene die Gleichheit der Tumorgrößen in allen Cholesteringruppen ."))
         )
         
       )

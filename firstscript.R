@@ -83,7 +83,8 @@ data_final <- data_final%>%relocate(ID,chol)
 
 #sort values in data frame by ID using order
 data_final <-data_final[order(data_final$ID),]
-
+homogen <-chisq.test(data_final$tumor_size_dichotom,data_final$chol_dichotom)
+homogen$p.value
 #check cleaned data 
 View(data_final)
 

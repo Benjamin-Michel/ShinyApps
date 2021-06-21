@@ -4,14 +4,14 @@ library(tidyverse)
 # Version 1.0
 
 FirstApp <-fluidPage(
-  titlePanel("Iris App"),
+  titlePanel("Cancer App"),
   sidebarLayout(
     sidebarPanel(
-      selectInput(
-        "species",
-        label = h3("Select species"),
-        choices = iris$species
-      )
+      p('Gruupe 5'),br(),
+      p('Gruppemitglieder : Benjamin Michel , Kussi Katsha , Devirm Evelik') ,
+      p('Version 1.0'),br(),
+      p('Dieses App wurde im Rahmen der Vorlesung Einführung in R und Shiny erstellt .'),br(),
+      p('Datensatz : cancer_data.csv ')
     ),
     mainPanel(
       tabsetPanel(
@@ -40,9 +40,9 @@ FirstApp <-fluidPage(
                  br(),h3('About this R Shiny App'),br(),
                  p('Shiny Visualization. R Shiny Apps, Sommersemester 2021'),br(),
                  p('Version 1.0'),br(),
-                 p('Last update: 17-MAY-2021'),br(),
+                 p('Last update: 20-JUNE-2021'),br(),
                  p('Used packages: tidyverse(1.3.0), shiny(1.6.0)'),br(),
-                 p('Author: Benjamin Michel')
+                 p('Author: Benjamin Michel , Kussi Katsha , Devirm Evelik')
         )
       )
     )
