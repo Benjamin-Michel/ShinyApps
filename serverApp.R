@@ -111,16 +111,32 @@ server<-function(input, output){
   
 
   #generate the plot output 
-  output$plot1 <- renderPlot({
-      ggplot(data = data_final) +
-      geom_point(aes(x = input$X_Axis, y = input$Y_Axis, color = gender)) +
+  
+    x_var<- eventReactive(input$goButton, {
+      input$var1
+    })
+    y_var <- eventReactive(input$goButton,{
+      input$var2
+    })
+    output$plot1 <- renderPlot({
+      x <- x_var()
+      y <- y_var()
+      coloring <- switch(input$color,
+                     gender = data_final$gender,
+                     smoking = data_final$smoking,
+                     None = FALSE)
+     ggplot(data=data_final) +
+      geom_point(aes_string(x =x, y =y,colour="coloring")) +
       labs(title = "Scatterplot",
-           x = "BMI",
-           y = "Tumorgröße")+geom_smooth(mapping = aes(x = BMI, y = tumour_size),se = FALSE)
+           x = x,y = y)+geom_smooth(aes_string(x = x, y = y),se = FALSE)
     })
   
   output$plot2 <- renderPlot({
-      ggplot(data = data_final, aes(x=gender, y= tumour_size, fill = gender)) +
+    coloring <- switch(input$dist,
+                       gender = data_final$gender,
+                       smoking = data_final$smoking,
+                       None = FALSE)
+      ggplot(data = data_final, aes_string(x=input$dist, y= "tumour_size", fill = input$dist)) +
       geom_boxplot()+
       labs(title = "Boxplot",
            x = "Geschlecht",
@@ -138,7 +154,7 @@ server<-function(input, output){
   
   
   output$plot4 <- renderPlot({
-      ggplot(data = data_final,aes(x = altersgruppe ,fill=tumor_size_dichotom)) +
+      ggplot(data = data_final,aes_string(x = "altersgruppe" ,fill=input$befuellen)) +
       geom_bar( ) +
       labs(title = "Säulendiagram",
            x = "Altersgruppen",

@@ -13,7 +13,7 @@ rm(list=ls())
 
 #1.read csv file 
 initial_data <- read.csv("cancer_data.csv",sep=",",header = TRUE)
-
+str(data_final)
 #2.add new columns 
 
 #2.1 add altersgrppe 
@@ -88,9 +88,10 @@ homogen$p.value
 #check cleaned data 
 View(data_final)
 
-
-
-
+sss <- data_final[,  chol]
+ss <- data_final[, c("chol"), drop = FALSE]
+class(data_final["chol"])
+class(as.col_spec(ss))
 
 
 
@@ -109,7 +110,7 @@ Sctplt<-ggplot(data = data_final) +
        x = "BMI",
        y = "Tumorgröße")+geom_smooth(mapping = aes(x = BMI, y = tumour_size),se = FALSE)
 Sctplt
-
+class(data_final$chol)
 cor(data_final$tumour_size,data_final$BMI)
 #positive Koerrilation
 

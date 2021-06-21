@@ -16,26 +16,40 @@ FirstApp <-fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Data Table", tableOutput("value")),
-        tabPanel("Grafiken", 
-                 
-            varSelectInput(
-              "X_Axis",
-              label = "Select Variable 1",
-              data = data_final
-            ),
+        tabPanel("Grafiken",
             
-            varSelectInput(
-              "Y_Axis",
-              label = "Select Variable 2",
-              data = data_final 
-            ),
+            
+          
                  
                
                  tabsetPanel(tabPanel("graph1",
+                                      
+                                      selectInput(
+                                        "var1", 
+                                        label = h3("Select X variable :"), 
+                                        choices = c("chol","BMI","tumour_size"),
+                                        selected ="tumour_size"
+                                      ),
+                                      
+                                      selectInput(
+                                        "var2", 
+                                        label = h3("Select Y Variable :"), 
+                                        choices = c("chol","BMI","tumour_size"),
+                                        selected ="BMI"
+                                      ),
+                                      radioButtons("color", "Färbung nach:",
+                                                   list("Geschlecht" = "gender",
+                                                     "Rauchen" = "smoking",
+                                                     "None" = "Null")),actionButton("goButton", "Update"),
           plotOutput("plot1"),tags$p("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen BMI und der Tumorgröße gibt")),tabPanel("graph2",
-                                        plotOutput("plot2"),tags$p("Das Boxplot zeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Geschlecht an")),tabPanel("graph3",
-               plotOutput("plot3"),tags$p("Das Boxplotz zeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Rauchen an"),),tabPanel("graph4",
-                                                                                                    plotOutput("plot4"),tags$p("Das Säulendiagramm, eingeteilt in Altersgruppen, zeigt uns die Häufigkeiten in den jweiligen Altersgruppen")))),
+                                                                                                                                          radioButtons("dist", "Einteilung nach:",
+                                                                                                                                                       list("Geschlecht" = "gender",
+                                                                                                                                                            "Rauchen" = "smoking",
+                                                                                                                                                            "None" = "FALSE")),actionButton("goButton_01", "Update"),  plotOutput("plot2"),tags$p("Das Boxplot zeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Geschlecht an")),tabPanel("graph3",
+                                                                                                                                                                                                                                                                                                                                                         radioButtons("befuellen", "Säulenbefüllung nach:",
+                                                                                                                                                                                                                                                                                                                                                                      list("Tumorgrößen" = "tumour_size_dichotom",
+                                                                                                                                                                                                                                                                                                                                                                           "Cholesterin" = "chol_dichotom",
+                                                                                                                                                                                                                                                                                                                                                                           "Geschlecht" = "gender")),plotOutput("plot4"),tags$p("Das Säulendiagramm, eingeteilt in Altersgruppen, zeigt uns die Häufigkeiten in den jweiligen Altersgruppen")))),
           #,tags$p("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen BMI und der Tumorgröße",  
            #                         plotOutput("plot2", tags$p("Das Boxplotzeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Geschlecht an"),
             #                                   plotOutput("plot3", tags$p("Das Boxplotz zeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Rauchen an"),                    
