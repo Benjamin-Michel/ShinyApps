@@ -50,11 +50,7 @@ FirstApp <-fluidPage(
                                                                                                                                                                                                                                                                                                                                                                       list("Tumorgrößen" = "tumour_size_dichotom",
                                                                                                                                                                                                                                                                                                                                                                            "Cholesterin" = "chol_dichotom",
                                                                                                                                                                                                                                                                                                                                                                            "Geschlecht" = "gender")),plotOutput("plot4"),tags$p("Das Säulendiagramm, eingeteilt in Altersgruppen, zeigt uns die Häufigkeiten in den jweiligen Altersgruppen")))),
-          #,tags$p("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen BMI und der Tumorgröße",  
-           #                         plotOutput("plot2", tags$p("Das Boxplotzeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Geschlecht an"),
-            #                                   plotOutput("plot3", tags$p("Das Boxplotz zeigt uns die Häufigkeit im Zusammenhang mit Tumorgröße und dem Rauchen an"),                    
-             #                                             plotOutput("plot4", tags$p("Das Säulendiagramm, eingeteilt in Altersgruppen, zeigt uns die Häufigkeiten in den jweiligen Altersgruppen"),
-              #                                            ))))),
+         
 
         tabPanel("Tabellen",tabsetPanel(tabPanel("Tabelle 1",tags$p("Erste Tabelle ist eine Kreuztabelle zwischen die nach TNM klassifizierte Tumorgrößen und Altersgruppen :"), tableOutput("tab_01")
                                                  ,tags$p("Anschaulich gibt es keine Patient über 45 Lebensjahr , deren Tumoren T1(<2 cm) nach TNM klassifiziert .Sowie besteht es keine junge Patienten an T2 Tumoren betroffen .")
