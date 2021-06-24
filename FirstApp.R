@@ -67,7 +67,18 @@ FirstApp <-fluidPage(
                                                             br(), actionButton("but_03", "Homogenität testen")))),
         tabPanel("About",
                  br(),h3('About this R Shiny App'),br(),
+                 h1('Warum Lungenkrebs ?'),br(),
+                 p('Der Lungenkrebs ist eine menschenabhängige und auch eine sehr häufig auftretende Krebsart. Daher haben wir den Lungenkrebs auf unserem Projekt bezogen.
+                   Dieser ist ein bösartiger Tumor, der von Bronchialschleimhautzellen oder Lungengewebezellen ausgeht. Ärzte nennen diesen Krebs auch Lungenkarzinom oder Bronchialkarzinom
+                   Das Bronchialkarzinom tritt hauptsächlich im Alter zwischen 50 und 70 Jahren auf. Das durchschnittliche Erkrankungsalter bei Diagnosestellung beträgt nur 69 Jahre. 
+                   Im Frühstadium von Lungenkrebs gibt es fast keine typischen Anzeichen und Symptome. Deshalb bleibt es oft lange unentdeckt. Bei Lungenröntgenuntersuchungen finden Ärzte häufig nur
+                   zufällig den Lungenkrebs, da der Patient an chronischem Husten, Atemnot oder Kurzatmigkeit leidet.'),br(),
+                 p('Für den Lungenkrebs ist mit weitem Abstand das Rauchen die Ursache. Ungefähr 90 Prozent aller Bronchialkarzinom-Patienten sind oder waren Raucher. Dabei hängt das Risiko vor allem davon ab,
+                 wie viel der Betroffene geraucht hat. Fachleute drücken dies anhand der Packungsmenge aus: Je mehr Zigaretten geraucht wurden, desto höher ist das Krebsrisiko. 
+                  Doch nicht nur selber zu rauchen macht krank, auch Passivrauchen erhöht das Risiko, an Lungenkrebs zu erkranken – und zwar um den Faktor 1,3 bis 2. Wer also das Rauchen aufgibt, kann das Risiko für Lungenkrebs deutlich senken.
+                  Vor allem für sich selbst, aber auch für seine Mitmenschen.'),br(),
                  p('Shiny Visualization. R Shiny Apps, Sommersemester 2021'),br(),
+                 
                  p('Version 1.0'),br(),
                  p('Last update: 20-JUNE-2021'),br(),
                  p('Used packages: tidyverse(1.3.0), shiny(1.6.0)'),br(),
