@@ -41,7 +41,7 @@ FirstApp <-fluidPage(
                                                    list("Geschlecht" = "gender",
                                                      "Rauchen" = "smoking",
                                                      "None" = "Null")),actionButton("goButton", "Update"),
-          plotOutput("plot1"),tags$p("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen BMI und der Tumorgröße gibt")),tabPanel("graph2",
+          plotOutput("plot1"),textOutput("plotLabeling")),tabPanel("graph2",
                                                                                                                                           radioButtons("dist", "Einteilung nach:",
                                                                                                                                                        list("Geschlecht" = "gender",
                                                                                                                                                             "Rauchen" = "smoking",

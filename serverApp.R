@@ -130,6 +130,10 @@ server<-function(input, output){
       labs(title = "Scatterplot",
            x = x,y = y)+geom_smooth(aes_string(x = x, y = y),se = FALSE)
     })
+    output$plotLabeling <-renderText({
+      x <- x_var()
+      y <- y_var()
+      paste0("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen ",x," und ",y  ," gibt ,Färbung nach:",input$color)}) 
   
   output$plot2 <- renderPlot({
     coloring <- switch(input$dist,
