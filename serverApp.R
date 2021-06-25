@@ -77,7 +77,7 @@ server<-function(input, output){
   #sort values in data frame by ID using order
   data_final <-data_final[order(data_final$ID),]
   
-  output$value <- renderTable(data_final)
+  output$value <- renderTable(data_final%>% filter (gender =="männlich"&smoking=="nicht-raucher"))
     
   #####################################################################################
   #1.Altersgruppen mit Tumour size dichotom
@@ -133,7 +133,7 @@ server<-function(input, output){
     output$plotLabeling <-renderText({
       x <- x_var()
       y <- y_var()
-      paste0("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen ",x," und ",y  ," gibt ,Färbung nach:",input$color)}) 
+      paste0("Das Scatterplot zeigt uns, ob es eine Koerrilation zwsichen ",x," und ",y  ," gibt ,Färbung nach: ",input$color)}) 
   
   output$plot2 <- renderPlot({
     coloring <- switch(input$dist,
