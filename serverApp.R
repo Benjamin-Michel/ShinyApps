@@ -81,13 +81,16 @@ server<-function(input, output){
   #}) 
   observe({
     parm <- input$checkGroup
-    print(parm)
-    if(parm=="0") {output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
-    if(parm=="1") {output$value <-renderTable(filter(data_final,smoking=="raucher"))}
+    parm <- as.vector(parm)
     if(is.null(parm)) {output$value <-renderTable(data_final)}
-    else{output$value <-renderTable(data_final)}
+    else{
+      if (length (parm)==2){output$value <-renderTable(data_final)}
+      else{
+    if(parm==c("0")) {output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
+    else if(parm==c("1")) {output$value <-renderTable(filter(data_final,smoking=="raucher"))}}
+    }
+    
   })
-  #output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))
   
     
   #####################################################################################
