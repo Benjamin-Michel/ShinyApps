@@ -15,7 +15,9 @@ FirstApp <-fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Data Table", tableOutput("value")),
+        tabPanel("Data Table", checkboxGroupInput("checkGroup",label = "Rauchenverhältnis" ,
+                                                  choices = list("nicht-raucher" = 0, "raucher" = 1),
+                                                  selected = 1),tableOutput("value")),
         tabPanel("Grafiken",
             
             

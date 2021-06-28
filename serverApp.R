@@ -3,7 +3,6 @@ library(epiR)
 library(ggplot2)
 
 server<-function(input, output){
-  theData <- reactive(iris %>% filter(Species == input$species))
   initial_data <- read.csv("cancer_data.csv",sep=",",header = TRUE)
   
   
@@ -76,8 +75,20 @@ server<-function(input, output){
   
   #sort values in data frame by ID using order
   data_final <-data_final[order(data_final$ID),]
+  #datasetInput <- reactive(input$checkGroup,{
+  #  perm.vector <- as.vector(input$checkGroup)
+   # perm.vector
+  #}) 
+  observe({
+    parm <- input$checkGroup
+    print(parm)
+    if(parm=="0") {output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
+    if(parm=="1") {output$value <-renderTable(filter(data_final,smoking=="raucher"))}
+    if(is.null(parm)) {output$value <-renderTable(data_final)}
+    else{output$value <-renderTable(data_final)}
+  })
+  #output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))
   
-  output$value <- renderTable(data_final%>% filter (gender =="männlich"&smoking=="nicht-raucher"))
     
   #####################################################################################
   #1.Altersgruppen mit Tumour size dichotom
