@@ -3,7 +3,6 @@ library(epiR)
 library(ggplot2)
 
 server<-function(input, output){
-  theData <- reactive(iris %>% filter(Species == input$species))
   initial_data <- read.csv("cancer_data.csv",sep=",",header = TRUE)
   
   
@@ -76,8 +75,36 @@ server<-function(input, output){
   
   #sort values in data frame by ID using order
   data_final <-data_final[order(data_final$ID),]
+  #datasetInput <- reactive(input$checkGroup,{
+  #  perm.vector <- as.vector(input$checkGroup)
+   # perm.vector
+  #}) 
+  observe({
+    parm_smoking <- input$checkGroup
+    parm_smoking <- as.vector(parm_smoking)
+    if(is.null(parm_smoking)) {output$value <-renderTable(data_final)}
+    else{
+      if (length (parm_smoking)==2){output$value <-renderTable(data_final)}
+      else{
+    if(parm_smoking==c("0")) {output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
+    else if(parm_smoking==c("1")) {output$value <-renderTable(filter(data_final,smoking=="raucher"))}}
+      }
+    
+  })
   
-  output$value <- renderTable(data_final%>% filter (gender =="männlich"&smoking=="nicht-raucher"))
+  observe({
+    parm_gender <- input$checkGroup
+    parm_gender <- as.vector(parm_gender)
+    if(is.null(parm_gender)) {output$value <-renderTable(data_final)}
+    else{
+      if (length (parm_gender)==2){output$value <-renderTable(data_final)}
+      else{
+        if(parm_gender==c("0")) {output$value <-renderTable(filter(data_final,gender=="männlich"))}
+        else if(parm_gender==c("1")) {output$value <-renderTable(filter(data_final,gender=="weiblich"))}}
+    }
+    
+  })
+  
     
   #####################################################################################
   #1.Altersgruppen mit Tumour size dichotom
