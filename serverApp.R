@@ -80,14 +80,27 @@ server<-function(input, output){
    # perm.vector
   #}) 
   observe({
-    parm <- input$checkGroup
-    parm <- as.vector(parm)
-    if(is.null(parm)) {output$value <-renderTable(data_final)}
+    parm_smoking <- input$checkGroup
+    parm_smoking <- as.vector(parm_smoking)
+    if(is.null(parm_smoking)) {output$value <-renderTable(data_final)}
     else{
-      if (length (parm)==2){output$value <-renderTable(data_final)}
+      if (length (parm_smoking)==2){output$value <-renderTable(data_final)}
       else{
-    if(parm==c("0")) {output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
-    else if(parm==c("1")) {output$value <-renderTable(filter(data_final,smoking=="raucher"))}}
+    if(parm_smoking==c("0")) {output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
+    else if(parm_smoking==c("1")) {output$value <-renderTable(filter(data_final,smoking=="raucher"))}}
+      }
+    
+  })
+  
+  observe({
+    parm_gender <- input$checkGroup
+    parm_gender <- as.vector(parm_gender)
+    if(is.null(parm_gender)) {output$value <-renderTable(data_final)}
+    else{
+      if (length (parm_gender)==2){output$value <-renderTable(data_final)}
+      else{
+        if(parm_gender==c("0")) {output$value <-renderTable(filter(data_final,gender=="männlich"))}
+        else if(parm_gender==c("1")) {output$value <-renderTable(filter(data_final,gender=="weiblich"))}}
     }
     
   })
