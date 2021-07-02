@@ -167,15 +167,13 @@ server<-function(input, output){
            y = "Tumorgröße")
   })
   
-  output$plot3 <- renderPlot({
-      ggplot(data = data_final,aes(x=smoking, y= tumour_size, fill = smoking)) +
-      geom_boxplot()+
-      labs(title = "Boxplot",
-           x = "Rauchen Verhältnis",
-           y = "Tumorgröße")
-  })
-  
-  
+  output$plotLabeling1 <-renderText({
+    lab <- input$dist
+    print(lab)
+    if(lab=="gender"){paste0("Der Boxplot zeigt uns die Verteilung der Werte von Tumorgrößen zwischen männlichen und weiblichen Patienten")}
+    if(lab=="smoking"){paste0("Der Boxplot zeigt uns die Verteilung der Werte von Tumorgrößen zwischen Rauchern und Nichtrauchern Patienten")}
+    else{paste0("Der Boxplot zeigt uns die Verteilung der Werte von Tumorgrößen zwischen männlichen und weiblichen Patienten")}
+    })
   output$plot4 <- renderPlot({
       ggplot(data = data_final,aes_string(x = "altersgruppe" ,fill=input$befuellen)) +
       geom_bar( ) +

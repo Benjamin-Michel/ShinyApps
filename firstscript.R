@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 library(dplyr)
 #library(plyr)
 library(tidyr)
@@ -15,7 +14,7 @@ rm(list=ls())
 
 #1.read csv file 
 initial_data <- read.csv("cancer_data.csv",sep=",",header = TRUE)
-filter(initial_data,gender==1&smoking==0)
+filter(initial_data,gender==0&smoking==1)
 str(data_final)
 #2.add new columns 
 
@@ -95,15 +94,6 @@ sss <- data_final[,  chol]
 ss <- data_final[, c("chol"), drop = FALSE]
 class(data_final["chol"])
 class(as.col_spec(ss))
-
-
-
-
-
-
-
-
-
 
 ########################################################################################################################
 #1. Scatterplot zwischen Bmi und Tumorgröße
@@ -186,4 +176,3 @@ tab_04
 summary(data_final$BMI)
 
 
->>>>>>> 15bb8c72a067b93fef8223355f6b71aab044cd4b
