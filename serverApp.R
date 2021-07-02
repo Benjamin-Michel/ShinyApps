@@ -170,11 +170,11 @@ server<-function(input, output){
   output$plotLabeling1 <-renderText({
     lab <- input$dist
     print(lab)
-    if(lab=="gender"){paste0("Der Boxplot zeigt uns die Verteilung der Werte von Tumorgrößen zwischen männlichen und weiblichen Patienten")}
-    if(lab=="smoking"){paste0("Der Boxplot zeigt uns die Verteilung der Werte von Tumorgrößen zwischen Rauchern und Nichtrauchern Patienten")}
-    else{paste0("Der Boxplot zeigt uns die Verteilung der Werte von Tumorgrößen zwischen männlichen und weiblichen Patienten")}
+    if(lab=="gender"){paste0("Die Boxplots zeigen uns den Unterschied bei der Verteilung der Tumorgrößenwerten zwischen männlichen und weiblichen Patienten")}
+    if(lab=="smoking"){paste0("Die Boxplots zeigen uns den Unterschied bei der Verteilung der Tumorgrößenwerten zwischen Rauchern und Nichtrauhern Patienten")}
+    else{paste0("Der Boxplot zeigt uns die Verteilung der Werte von Tumorgrößen")}
     })
-  output$plot4 <- renderPlot({
+  output$plot3 <- renderPlot({
       ggplot(data = data_final,aes_string(x = "altersgruppe" ,fill=input$befuellen)) +
       geom_bar( ) +
       labs(title = "Säulendiagram",
