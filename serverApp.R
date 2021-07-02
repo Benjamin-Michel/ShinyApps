@@ -80,29 +80,19 @@ server<-function(input, output){
    # perm.vector
   #}) 
   observe({
-    parm_smoking <- input$checkGroup
-    parm_smoking <- as.vector(parm_smoking)
-    parm_gender <- input$checkGroupGeschlecht
-    parm_gender <- as.vector(parm_gender)
-    if((is.null(parm_smoking)&is.null(parm_gender))|(length (parm_smoking)==2&length (parm_gender)==2)) {output$value <-renderTable(data_final)}
-    else if(is.null(parm_smoking)& !is.null(parm_gender)) {
-      if (length(parm_gender)==2){output$value <-renderTable(data_final)}}
-      else if (parm_gender==c("0")){output$value <-renderTable(filter(data_final,gender=="männlich"))}
-      else if (parm_gender==c("1")){output$value <-renderTable(filter(data_final,gender=="weiblich"))}
-    else if(!is.null(parm_smoking)& is.null(parm_gender)) {
-      if (length(parm_smoking)==2){output$value <-renderTable(data_final)}}
-      else if (parm_smoking==c("0")){output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
-      else if (parm_smoking==c("1")){output$value <-renderTable(filter(data_final,smoking=="raucher"))}
-    else{
-      if (length(parm_smoking)==2&parm_gender==c("0")){output$value <-renderTable(filter(data_final,gender=="männlich"))}
-      else if  (length(parm_smoking)==2&parm_gender==c("1")){output$value <-renderTable(filter(data_final,gender=="weiblich"))}
-      else if  (length(parm_gender)==2&parm_smoking==c("1")){output$value <-renderTable(filter(data_final,smoking=="raucher"))}
-      else if  (length(parm_gender)==2&parm_smoking==c("0")){output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
-      else if  (parm_smoking==c("1")&parm_gender==c("1")){output$value <-renderTable(filter(data_final,gender=="weiblich"&smoking=="raucher"))}
-      else if  (parm_gender==c("0")&parm_smoking==c("1")){output$value <-renderTable(filter(data_final,smoking=="raucher"&gender=="männlich"))}
-      else if  (parm_gender==c("1")&parm_smoking==c("0")){output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"&gender=="weiblich"))}
-      else if  (parm_gender==c("0")&parm_smoking==c("0")){output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"&gender=="männlich"))}
-    }
+    input$selectvals
+    valsk<- eventReactive(input$refreshbut, {
+      input$selectvals
+    })
+    k<-valsk()
+    if(k=="Alle Beobachtungen"){output$value <-renderTable(data_final)}
+    else if(k=="Alle Raucher"){output$value <-renderTable(filter(data_final,smoking=="raucher"))}
+    else if (k=="Alle NichtRaucher"){output$value <-renderTable(filter(data_final,smoking=="nicht-raucher"))}
+    else if (k=="Alle Männer"){output$value <-renderTable(filter(data_final,gender=="männlich"))}
+    else if (k=="Alle Frauen"){output$value <-renderTable(filter(data_final,gender=="weiblich"))}
+    else if (k=="Alle Frauen Raucher"){output$value <-renderTable(filter(data_final,gender=="weiblich"&smoking=="raucher"))}
+    else if (k=="Alle Männer Raucher"){output$value <-renderTable(filter(data_final,gender=="männlich"&smoking=="raucher"))}
+    else{output$value <-renderTable()}
   })
   
   
