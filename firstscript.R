@@ -13,6 +13,7 @@ rm(list=ls())
 
 #1.read csv file 
 initial_data <- read.csv("cancer_data.csv",sep=",",header = TRUE)
+filter(initial_data,gender==1&smoking==0)
 str(data_final)
 #2.add new columns 
 

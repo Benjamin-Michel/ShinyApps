@@ -15,18 +15,12 @@ FirstApp <-fluidPage(
     ),
     mainPanel(
       tabsetPanel(
-        tabPanel("Data Table", checkboxGroupInput("checkGroup",label = "Rauchenverhältnis" ,
-                                                  choices = list("nicht-raucher" = 0, "raucher" = 1),
-
-                                                  selected = 1),checkboxGroupInput("checkGroupGeschlecht",label = "Rauchenverhältnis" ,
-                                                                                   choices = list("m" = 0, "w" = 1),
-                                                                                   selected = 1),tableOutput("value")),
-
-                                                  selected = 0),
-        
-                                checkboxGroupInput("checkGroup",label = "Geschlecht" ,
-                                                  choices = list("männlich" = 0, "weiblich" = 1),
-                                                  selected = 0),tableOutput("value")),
+        tabPanel("Data Table", selectInput(
+          "selectvals", 
+          label = h3("AusgabeKriterien : "), 
+          choices = c("Alle Raucher","Alle NichtRaucher","Alle Frauen Raucher","Alle Männer Raucher","Alle Männer","Alle Frauen","Alle Beobachtungen"),
+          selected ="Alle Beobachtungen"
+        ),actionButton("refreshbut", "refresh"),tableOutput("value")),
       
       
 
@@ -96,6 +90,6 @@ FirstApp <-fluidPage(
         )
       )
     )
-  )
+  
 )
-
+)
