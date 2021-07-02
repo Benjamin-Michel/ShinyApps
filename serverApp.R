@@ -171,7 +171,7 @@ server<-function(input, output){
     lab <- input$dist
     print(lab)
     if(lab=="gender"){paste0("Die Boxplots zeigen uns den Unterschied bei der Verteilung der Tumorgrößenwerten zwischen männlichen und weiblichen Patienten")}
-    if(lab=="smoking"){paste0("Die Boxplots zeigen uns den Unterschied bei der Verteilung der Tumorgrößenwerten zwischen Rauchern und Nichtrauhern Patienten")}
+    else if(lab=="smoking"){paste0("Die Boxplots zeigen uns den Unterschied bei der Verteilung der Tumorgrößenwerten zwischen Rauchern und Nichtrauhern Patienten")}
     else{paste0("Der Boxplot zeigt uns die Verteilung der Werte von Tumorgrößen")}
     })
   output$plot3 <- renderPlot({

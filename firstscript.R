@@ -19,17 +19,23 @@ str(data_final)
 #2.add new columns 
 
 #2.1 add altersgrppe 
-table(initial_data$age) # see frequency table of age
-summary(initial_data$age) # see the Characteristic values 
-data_01 <- initial_data%>%mutate(altersgruppe=case_when( # add new column for age class based on Characteristic values 
+table(initial_data$age)                                              # see frequency table of age
+summary(initial_data$age)   
+# see the Characteristic values
+
+
+data_01 <- initial_data%>%mutate(altersgruppe=case_when(     # add new column for age class based on Characteristic values 
   between(age,18,29) ~ "under 30 ",
   between(age,30,44) ~ "30-44",
   between(age,45,59) ~ "45-59 ",
   between(age,60,100) ~ "above 60"))
 
+
+
 #2.2 add tumor_size_dichotom 
-summary(initial_data$tumour_size) # see the Characteristic values
-data_01 <- data_01%>%mutate(tumor_size_dichotom=case_when( # add new column for tumor_size_dichotom based on Characteristic values 
+summary(initial_data$tumour_size)                             # see the Characteristic values
+data_01 <- data_01%>%mutate(tumor_size_dichotom=case_when(                                          # add new column for tumor_size_dichotom based on Characteristic values 
+ 
   between(tumour_size,1.6,2) ~ "T1 ",
   between(tumour_size,2,5) ~ "T2"))
 
@@ -60,15 +66,19 @@ chol_mean_weiblich <- data_final%>%select(chol,gender)%>%filter(gender=="weiblic
 chol_mean_maenlich <- data_final%>%select(chol,gender)%>%filter(gender=="männlich") %>%select(chol)%>% sapply(FUN=mean,na.rm=TRUE)
 
 #complete the missing values in sub-dataframes
-data_final_m<-data_final%>%filter(gender=="männlich") %>%complete(chol , fill = list(chol = chol_mean_maenlich[[1]]))
-data_final_w<-data_final%>%filter(gender=="weiblich") %>%complete(chol , fill = list(chol = chol_mean_weiblich[[1]]))
+data_final_m<-data_final%>%filter(gender=="männlich") %>% 
+  complete(chol , fill = list(chol = chol_mean_maenlich[[1]]))
+
+
+data_final_w<-data_final%>%filter(gender=="weiblich") %>%
+  complete(chol , fill = list(chol = chol_mean_weiblich[[1]]))
 
 #merge completed datframes
 data_final<-rbind(data_final_m, data_final_w)
 
 #2.6 add chol_dichotom 
 #reference :https://www.praktischarzt.de/untersuchungen/blutuntersuchung/cholesterinwerte/
-data_final <- data_final%>%mutate(chol_dichotom=case_when( # add new column for tumor_size_dichotom based on Characteristic values 
+data_final <- data_final%>%mutate(chol_dichotom=case_when(               # add new column for tumor_size_dichotom based on Characteristic values 
   between(chol,146,199.286331116283) ~ "niedrig",
   between(chol,200,220.944676112364) ~ "normal",
   between(chol,221,282) ~ "hoch"))
