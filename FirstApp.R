@@ -58,8 +58,8 @@ FirstApp <-fluidPage(
                                                                                                                                                                                   radioButtons("befuellen", "Säulenbefüllung nach:",
                                                                                                                                                                                    list("Tumorgrößen" = "tumor_size_dichotom",
                                                                                                                                                                                         "Cholesterin" = "chol_dichotom",
-                                                                                                                                                                                          "Geschlecht" = "gender")),plotOutput("plot4"),
-                                                                                                                                                                           tags$p("Das Säulendiagramm, eingeteilt in Altersgruppen, zeigt uns die Häufigkeiten in den jweiligen Altersgruppen")))),
+                                                                                                                                                                                          "Geschlecht" = "gender")),plotOutput("plot3"),
+                                                                                                                                                                           textOutput("plotLabeling2")))),
          
 
         tabPanel("Tabellen",tabsetPanel(tabPanel("Tabelle 1",tags$p("Erste Tabelle ist eine Kreuztabelle zwischen die nach TNM klassifizierte Tumorgrößen und Altersgruppen :"), tableOutput("tab_01")

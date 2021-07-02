@@ -183,8 +183,12 @@ server<-function(input, output){
       geom_text(aes(label=scales::percent(..count../sum(..count..))),
                 stat='count',size = 3, hjust = 0.5, vjust = 0.5, position ="stack")
   }) 
-  
-  
+  output$plotLabeling2 <-renderText({
+    lab1 <- input$befuellen
+    if(lab1=="gender"){paste0("Das Säulendiagramm zeigt uns die Häufigkeiten, verteilt auf die Altersgruppen und die Säulen sind befüllt nach Geschlecht")}
+   else if(lab1=="chol_dichotom"){paste0("Das Säulendiagramm zeigt uns die Häufigkeiten, basierend auf den cholesterinwert und verteilt auf den Altersgruppen")}
+    else if(lab1=="tumor_size_dichotom"){paste0("Das Säulendiagramm zeigt uns die Häufigkeiten, basierend auf der Tumorgröße und verteilt auf die Altersgruppen")}}) 
+   
   
   output$tab_01 <- renderTable(as.data.frame.matrix(tab_01), striped=TRUE, bordered = TRUE,rownames = TRUE)
   output$tab_02 <- renderTable(as.data.frame.matrix(tab_02), striped=TRUE, bordered = TRUE,rownames = TRUE)
