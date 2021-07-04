@@ -232,7 +232,7 @@ server<-function(input, output){
          ODDS Ratio beträgt ",e$massoc.detail$OR.strata.score$est ,"<br>
                       Interpretation : Das Risiko bei Raucheren an großen Tumoren zu erkranken ist um 54 % höher als 
                       bei den Nicht-Raucheren .<br> 1 &isin; KI : [",e$massoc.detail$OR.strata.score$lower,",",e$massoc.detail$OR.strata.score$upper,"] <br> Interpretation :
-                      Ein signifikanter Unterschied zwischen Gruppen hinsichtlich der Chancen nicht nachgewiesen werden kann ."))
+                      Ein signifikanter Unterschied zwischen Gruppen hisnsichtlich der Chancen nicht nachgewiesen werden kann ."))
         )
         
       )
