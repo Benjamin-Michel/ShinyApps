@@ -8,10 +8,13 @@ FirstApp <-fluidPage(
   sidebarLayout(
     sidebarPanel(
       p('Gruppe 5'),br(),
-      p('Gruppemitglieder : Benjamin Michel , Kussi Katsha , Devirm Evelik') ,
-      p('Version 1.0'),br(),
-      p('Dieses App wurde im Rahmen der Vorlesung Einführung in R und Shiny erstellt .'),br(),
-      p('Datensatz : cancer_data.csv ')
+      p('Gruppemitglieder :',br(),br(),
+      p('Benjamin Michel',br(), br(), 
+      p('Kussi Katsha'),br(),
+      p('Devirm Evelik'),br(),br(),
+      p('Version 3.0'),br(),
+      p('Dieses App wurde im Rahmen der Vorlesung Einführung in R und Shiny erstellt.'),br(),
+      p('Datensatz : cancer_data.csv ')))
     ),
     mainPanel(
       tabsetPanel(
