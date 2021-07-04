@@ -85,10 +85,10 @@ FirstApp <-fluidPage(
                   Vor allem für sich selbst, aber auch für seine Mitmenschen.'),br(),
                  p('Shiny Visualization. R Shiny Apps, Sommersemester 2021'),br(),
                  
-                 p('Version 1.0'),br(),
-                 p('Last update: 20-JUNE-2021'),br(),
+                 p('Version 3.0'),br(),
+                 p('Last update: 04-JULY-2021'),br(),
                  p('Used packages: tidyverse(1.3.0), shiny(1.6.0)'),br(),
-                 p('Author: Benjamin Michel , Kussi Katsha , Devirm Evelik')
+                 p('Author: Benjamin Michel, Kussi Katsha, Devirm Evelik')
         )
       )
     )
