@@ -99,7 +99,7 @@ homogen <-chisq.test(data_final$tumor_size_dichotom,data_final$chol_dichotom)
 homogen$p.value
 #check cleaned data 
 View(data_final)
-
+write.csv(data_final,"datensatz.csv", row.names = FALSE)
 sss <- data_final[,  chol]
 ss <- data_final[, c("chol"), drop = FALSE]
 class(data_final["chol"])
